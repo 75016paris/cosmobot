@@ -1,0 +1,7 @@
+- generic [active] [ref=e1]:
+  - button "Toggle theme" [ref=e2] [cursor=pointer]: ◑
+  - link "[contact us]" [ref=e3] [cursor=pointer]:
+    - /url: mailto:info@cosmobot.fr
+  - heading "cosmobot.fr" [level=1] [ref=e4]
+  - link "[comptoir] — manage your restaurant team" [ref=e6] [cursor=pointer]:
+    - /url: https://comptoir.cosmobot.fr?theme=light

@@ -235,13 +235,16 @@
       const c = starColor();
 
       // Twinkling stars
+      const isLight = html.getAttribute('data-theme') === 'light';
       for (const s of stars) {
         s.phase += s.speed * dt;
         const twinkle = (Math.sin(s.phase) + 1) / 2;
         const alpha = s.baseAlpha + s.amplitude * twinkle;
+        const a = isLight ? Math.min(alpha * 1.5, 0.6) : alpha;
+        const r = isLight ? s.r * 1.8 : s.r;
         ctx.beginPath();
-        ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
-        ctx.fillStyle = `rgba(${c}, ${alpha})`;
+        ctx.arc(s.x, s.y, r, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(${c}, ${a})`;
         ctx.fill();
       }
 
