@@ -38,7 +38,7 @@
       transition: opacity 0.4s;
     }
 
-    [data-theme="light"] #stars { opacity: 0; }
+
 
     .logo {
       font-size: clamp(2.5rem, 8vw, 6rem);
@@ -224,10 +224,15 @@
     }
 
     let lastTime = 0;
+    function starColor() {
+      return html.getAttribute('data-theme') === 'light' ? '0, 0, 0' : '255, 255, 255';
+    }
+
     function draw(time) {
       const dt = (time - lastTime) / 1000;
       lastTime = time;
       ctx.clearRect(0, 0, w, h);
+      const c = starColor();
 
       // Twinkling stars
       for (const s of stars) {
@@ -236,7 +241,7 @@
         const alpha = s.baseAlpha + s.amplitude * twinkle;
         ctx.beginPath();
         ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
-        ctx.fillStyle = `rgba(255, 255, 255, ${alpha})`;
+        ctx.fillStyle = `rgba(${c}, ${alpha})`;
         ctx.fill();
       }
 
@@ -259,9 +264,9 @@
 
           const a = ss.life * ss.maxAlpha;
           const grad = ctx.createLinearGradient(tailX, tailY, ss.x, ss.y);
-          grad.addColorStop(0, 'rgba(255, 255, 255, 0)');
-          grad.addColorStop(0.8, `rgba(255, 255, 255, ${a * 0.3})`);
-          grad.addColorStop(1, `rgba(255, 255, 255, ${a})`);
+          grad.addColorStop(0, `rgba(${c}, 0)`);
+          grad.addColorStop(0.8, `rgba(${c}, ${a * 0.3})`);
+          grad.addColorStop(1, `rgba(${c}, ${a})`);
 
           ctx.beginPath();
           ctx.moveTo(tailX, tailY);
@@ -273,7 +278,7 @@
           // Head — small like a star
           ctx.beginPath();
           ctx.arc(ss.x, ss.y, 0.7, 0, Math.PI * 2);
-          ctx.fillStyle = `rgba(255, 255, 255, ${a * 1.2})`;
+          ctx.fillStyle = `rgba(${c}, ${a * 1.2})`;
           ctx.fill();
         } else {
           shootingStar = null;
