@@ -137,7 +137,7 @@
   </h1>
 
   <div class="products">
-    <a class="product-link" href="https://comptoir.cosmobot.fr">[<span class="product-name">comptoir</span>]<span class="product-tagline"> — manage your restaurant team</span></a>
+    <a class="product-link" id="comptoirLink" href="https://comptoir.cosmobot.fr">[<span class="product-name">comptoir</span>]<span class="product-tagline"> — manage your restaurant team</span></a>
   </div>
 
   <script>
@@ -162,8 +162,12 @@
     }
 
     function applyTheme() {
-      html.setAttribute('data-theme', resolve());
-      iconEl.textContent = RESOLVED_ICONS[resolve()];
+      const r = resolve();
+      html.setAttribute('data-theme', r);
+      iconEl.textContent = RESOLVED_ICONS[r];
+      // Sync theme to comptoir link
+      const link = document.getElementById('comptoirLink');
+      if (link) link.href = 'https://comptoir.cosmobot.fr?theme=' + r;
     }
 
     applyTheme();
