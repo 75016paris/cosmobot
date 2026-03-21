@@ -148,7 +148,7 @@
 
     // Theme — 3-state: light → dark → system (like comptoir)
     const THEMES = ['light', 'dark', 'system'];
-    const ICONS  = { light: '◐', dark: '●', system: '◑' };
+    const RESOLVED_ICONS = { light: '☾', dark: '☀' };
     const LABELS = { light: 'Light', dark: 'Dark', system: 'Auto' };
 
     function getSystemPref() {
@@ -163,7 +163,7 @@
 
     function applyTheme() {
       html.setAttribute('data-theme', resolve());
-      iconEl.textContent = ICONS[theme];
+      iconEl.textContent = RESOLVED_ICONS[resolve()];
     }
 
     applyTheme();
