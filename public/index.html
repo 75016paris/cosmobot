@@ -92,6 +92,35 @@
 
     .contact:hover { opacity: 1; }
     .contact:hover .contact-text { text-decoration: underline; }
+
+    /* Product section */
+    .products {
+      position: absolute;
+      top: calc(50% + clamp(2.5rem, 5vw, 4rem));
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 1;
+      text-align: center;
+    }
+
+    .product-link {
+      color: var(--text);
+      font-family: 'Courier New', Courier, monospace;
+      font-size: 0.85rem;
+      text-decoration: none;
+      opacity: 0.5;
+      transition: opacity 0.2s, color 0.4s;
+      display: inline-block;
+    }
+
+    .product-link:hover { opacity: 1; }
+    .product-link:hover .product-name { text-decoration: underline; }
+
+    .product-tagline {
+      opacity: 0.4;
+      font-size: 0.7rem;
+      margin-left: 0.3em;
+    }
   </style>
 </head>
 <body>
@@ -106,6 +135,10 @@
   <h1 class="logo">
     <span class="logo-cosmo">cosmo</span><span class="logo-bot">bot.fr</span>
   </h1>
+
+  <div class="products">
+    <a class="product-link" href="/comptoir">[<span class="product-name">comptoir</span>]<span class="product-tagline"> — manage your restaurant team</span></a>
+  </div>
 
   <script>
     const html = document.documentElement;
