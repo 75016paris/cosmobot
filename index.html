@@ -240,7 +240,7 @@
         s.phase += s.speed * dt;
         const twinkle = (Math.sin(s.phase) + 1) / 2;
         const alpha = s.baseAlpha + s.amplitude * twinkle;
-        const a = isLight ? Math.min(alpha * 1.2, 0.25) : alpha;
+        const a = isLight ? Math.min(alpha * 1.2, 0.40) : alpha;
         const r = isLight ? s.r * 1.2 : s.r;
         ctx.beginPath();
         ctx.arc(s.x, s.y, r, 0, Math.PI * 2);
