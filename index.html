@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cosmobot</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --bg: #0a0a0a;
+      --text: #f0f0f0;
+    }
+
+    [data-theme="light"] {
+      --bg: #ffffff;
+      --text: #111111;
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      transition: background 0.4s, color 0.4s;
+      overflow: hidden;
+      position: relative;
+    }
+
+    #stars {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      z-index: 0;
+      pointer-events: none;
+      transition: opacity 0.4s;
+    }
+
+    [data-theme="light"] #stars { opacity: 0; }
+
+    .logo {
+      font-size: clamp(2.5rem, 8vw, 6rem);
+      letter-spacing: -0.02em;
+      user-select: none;
+      z-index: 1;
+    }
+
+    .logo-cosmo {
+      font-family: Helvetica, 'Helvetica Neue', Arial, sans-serif;
+      font-weight: 700;
+    }
+
+    .logo-bot {
+      font-family: Helvetica, 'Helvetica Neue', Arial, sans-serif;
+      font-weight: 300;
+    }
+
+    /* Theme toggle — icon only */
+    .theme-toggle {
+      position: fixed;
+      top: 1.2rem;
+      right: 1.2rem;
+      z-index: 10;
+      background: none;
+      border: none;
+      color: var(--text);
+      cursor: pointer;
+      font-size: 1rem;
+      padding: 0;
+      transition: color 0.4s, opacity 0.2s;
+      opacity: 0.6;
+      line-height: 1;
+    }
+
+    .theme-toggle:hover { opacity: 1; }
+
+    /* Contact link */
+    .contact {
+      position: fixed;
+      bottom: 1.2rem;
+      right: 1.2rem;
+      z-index: 10;
+      color: var(--text);
+      font-family: 'Courier New', Courier, monospace;
+      font-size: 0.75rem;
+      text-decoration: none;
+      opacity: 0.6;
+      transition: opacity 0.2s, color 0.4s;
+    }
+
+    .contact:hover { opacity: 1; }
+    .contact:hover .contact-text { text-decoration: underline; }
+  </style>
+</head>
+<body>
+  <canvas id="stars"></canvas>
+
+  <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+    <span id="toggleIcon">●</span>
+  </button>
+
+  <a class="contact" href="mailto:info@cosmobot.fr">[<span class="contact-text">contact us</span>]</a>
+
+  <h1 class="logo">
+    <span class="logo-cosmo">cosmo</span><span class="logo-bot">bot.fr</span>
+  </h1>
+
+  <script>
+    const html = document.documentElement;
+    const iconEl = document.getElementById('toggleIcon');
+    const canvas = document.getElementById('stars');
+    const ctx = canvas.getContext('2d');
+
+    // Theme — 3-state: light → dark → system (like comptoir)
+    const THEMES = ['light', 'dark', 'system'];
+    const ICONS  = { light: '◐', dark: '●', system: '◑' };
+    const LABELS = { light: 'Light', dark: 'Dark', system: 'Auto' };
+
+    function getSystemPref() {
+      return window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
+    }
+
+    let theme = localStorage.getItem('cosmobot-theme') || 'system';
+
+    function resolve() {
+      return theme === 'system' ? getSystemPref() : theme;
+    }
+
+    function applyTheme() {
+      html.setAttribute('data-theme', resolve());
+      iconEl.textContent = ICONS[theme];
+    }
+
+    applyTheme();
+
+    document.getElementById('themeToggle').addEventListener('click', () => {
+      const i = THEMES.indexOf(theme);
+      theme = THEMES[(i + 1) % 3];
+      localStorage.setItem('cosmobot-theme', theme);
+      applyTheme();
+    });
+
+    window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', () => {
+      if (theme === 'system') applyTheme();
+    });
+
+    // Stars
+    let w, h, stars = [], shootingStar = null, shootingTimer = 0;
+
+    function resize() {
+      w = canvas.width = window.innerWidth;
+      h = canvas.height = window.innerHeight;
+      initStars();
+    }
+
+    function initStars() {
+      stars = [];
+      const count = Math.floor((w * h) / 2500);
+      for (let i = 0; i < count; i++) {
+        stars.push({
+          x: Math.random() * w,
+          y: Math.random() * h,
+          r: Math.random() * 0.7 + 0.2,
+          baseAlpha: Math.random() * 0.05 + 0.02,
+          phase: Math.random() * Math.PI * 2,
+          speed: Math.random() * 1.2 + 0.3,
+          amplitude: Math.random() * 0.95 + 0.4
+        });
+      }
+    }
+
+    function launchShootingStar() {
+      const startX = Math.random() * w * 0.7;
+      const startY = Math.random() * h * 0.3;
+      const angle = Math.PI / 7 + Math.random() * Math.PI / 8;
+      shootingStar = {
+        x: startX,
+        y: startY,
+        angle: angle,
+        speed: 7 + Math.random() * 3,
+        life: 1,
+        length: 140 + Math.random() * 80,
+        maxAlpha: 0.3 + Math.random() * 0.2
+      };
+    }
+
+    let lastTime = 0;
+    function draw(time) {
+      const dt = (time - lastTime) / 1000;
+      lastTime = time;
+      ctx.clearRect(0, 0, w, h);
+
+      // Twinkling stars
+      for (const s of stars) {
+        s.phase += s.speed * dt;
+        const twinkle = (Math.sin(s.phase) + 1) / 2;
+        const alpha = s.baseAlpha + s.amplitude * twinkle;
+        ctx.beginPath();
+        ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(255, 255, 255, ${alpha})`;
+        ctx.fill();
+      }
+
+      // Shooting star
+      shootingTimer += dt;
+      if (shootingTimer > 10 && !shootingStar) {
+        launchShootingStar();
+        shootingTimer = 0;
+      }
+
+      if (shootingStar) {
+        const ss = shootingStar;
+        ss.x += Math.cos(ss.angle) * ss.speed;
+        ss.y += Math.sin(ss.angle) * ss.speed;
+        ss.life -= dt * 0.4;
+
+        if (ss.life > 0 && ss.x < w + 100 && ss.y < h + 100) {
+          const tailX = ss.x - Math.cos(ss.angle) * ss.length * ss.life;
+          const tailY = ss.y - Math.sin(ss.angle) * ss.length * ss.life;
+
+          const a = ss.life * ss.maxAlpha;
+          const grad = ctx.createLinearGradient(tailX, tailY, ss.x, ss.y);
+          grad.addColorStop(0, 'rgba(255, 255, 255, 0)');
+          grad.addColorStop(0.8, `rgba(255, 255, 255, ${a * 0.3})`);
+          grad.addColorStop(1, `rgba(255, 255, 255, ${a})`);
+
+          ctx.beginPath();
+          ctx.moveTo(tailX, tailY);
+          ctx.lineTo(ss.x, ss.y);
+          ctx.strokeStyle = grad;
+          ctx.lineWidth = 0.8;
+          ctx.stroke();
+
+          // Head — small like a star
+          ctx.beginPath();
+          ctx.arc(ss.x, ss.y, 0.7, 0, Math.PI * 2);
+          ctx.fillStyle = `rgba(255, 255, 255, ${a * 1.2})`;
+          ctx.fill();
+        } else {
+          shootingStar = null;
+        }
+      }
+
+      requestAnimationFrame(draw);
+    }
+
+    window.addEventListener('resize', resize);
+    resize();
+    requestAnimationFrame(draw);
+  </script>
+</body>
+</html>
