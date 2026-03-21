@@ -164,7 +164,7 @@
     function applyTheme() {
       const r = resolve();
       html.setAttribute('data-theme', r);
-      iconEl.textContent = RESOLVED_ICONS[r];
+      iconEl.textContent = theme === 'system' ? '◑' : RESOLVED_ICONS[r];
       // Sync theme to comptoir link
       const link = document.getElementById('comptoirLink');
       if (link) link.href = 'https://comptoir.cosmobot.fr?theme=' + r;
