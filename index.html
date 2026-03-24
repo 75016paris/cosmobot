@@ -211,6 +211,100 @@
       };
     }
 
+    // --- Constellation hover animation ---
+    let constellationProgress = 0;
+    let constellationTarget = 0; // 0 = hidden, 1 = fully drawn
+    const CONSTELLATION_SPEED_IN = 1.8;  // seconds to draw fully
+    const CONSTELLATION_SPEED_OUT = 2.5; // seconds to fade out
+    const CONSTELLATION_MAX_ALPHA = 0.4;
+
+    // Anchor points: zodiac-like pattern, defined as ratios of viewport
+    // Positioned in upper-center area, above the product link
+    const constellationRatios = [
+      { x: 0.42, y: 0.28 },
+      { x: 0.46, y: 0.22 },
+      { x: 0.50, y: 0.18 },
+      { x: 0.55, y: 0.21 },
+      { x: 0.58, y: 0.27 },
+      { x: 0.56, y: 0.34 },
+      { x: 0.52, y: 0.38 },
+      { x: 0.48, y: 0.36 },
+      { x: 0.44, y: 0.33 },
+      { x: 0.50, y: 0.30 },
+    ];
+
+    // Edges: pairs of indices into the anchor array, forming the constellation shape
+    const constellationEdges = [
+      [0, 1], [1, 2], [2, 3], [3, 4],
+      [4, 5], [5, 6], [6, 7], [7, 8],
+      [8, 0], [9, 2], [9, 6],
+    ];
+
+    function getConstellationPoints() {
+      return constellationRatios.map(p => ({ x: p.x * w, y: p.y * h }));
+    }
+
+    // Hover listeners on the comptoir link
+    const comptoirLink = document.getElementById('comptoirLink');
+    comptoirLink.addEventListener('mouseenter', () => { constellationTarget = 1; });
+    comptoirLink.addEventListener('mouseleave', () => { constellationTarget = 0; });
+
+    function drawConstellation(dt) {
+      // Animate progress toward target
+      if (constellationTarget === 1 && constellationProgress < 1) {
+        constellationProgress = Math.min(1, constellationProgress + dt / CONSTELLATION_SPEED_IN);
+      } else if (constellationTarget === 0 && constellationProgress > 0) {
+        constellationProgress = Math.max(0, constellationProgress - dt / CONSTELLATION_SPEED_OUT);
+      }
+
+      if (constellationProgress <= 0) return;
+
+      const pts = getConstellationPoints();
+      const c = starColor();
+      const totalEdges = constellationEdges.length;
+
+      // Staggered drawing: each edge starts at a different progress threshold
+      for (let i = 0; i < totalEdges; i++) {
+        const edgeStart = i / totalEdges;
+        const edgeEnd = (i + 1) / totalEdges;
+        const edgeProgress = Math.max(0, Math.min(1, (constellationProgress - edgeStart) / (edgeEnd - edgeStart)));
+
+        if (edgeProgress <= 0) continue;
+
+        const [a, b] = constellationEdges[i];
+        const from = pts[a];
+        const to = pts[b];
+
+        // Interpolate endpoint for progressive draw
+        const toX = from.x + (to.x - from.x) * edgeProgress;
+        const toY = from.y + (to.y - from.y) * edgeProgress;
+
+        // Alpha: tied to overall progress for smooth fade
+        const alpha = constellationProgress * CONSTELLATION_MAX_ALPHA;
+
+        ctx.beginPath();
+        ctx.moveTo(from.x, from.y);
+        ctx.lineTo(toX, toY);
+        ctx.strokeStyle = `rgba(${c}, ${alpha})`;
+        ctx.lineWidth = 0.6;
+        ctx.stroke();
+
+        // Draw small dots at anchor points that are "reached"
+        if (edgeProgress > 0) {
+          ctx.beginPath();
+          ctx.arc(from.x, from.y, 1.2, 0, Math.PI * 2);
+          ctx.fillStyle = `rgba(${c}, ${alpha * 1.2})`;
+          ctx.fill();
+        }
+        if (edgeProgress >= 1) {
+          ctx.beginPath();
+          ctx.arc(to.x, to.y, 1.2, 0, Math.PI * 2);
+          ctx.fillStyle = `rgba(${c}, ${alpha * 1.2})`;
+          ctx.fill();
+        }
+      }
+    }
+
     let lastTime = 0;
     function starColor() {
       return html.getAttribute('data-theme') === 'light' ? '0, 0, 0' : '255, 255, 255';
@@ -276,6 +370,9 @@
           shootingStar = null;
         }
       }
+
+      // Constellation overlay
+      drawConstellation(dt);
 
       requestAnimationFrame(draw);
     }
