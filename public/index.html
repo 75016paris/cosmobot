@@ -107,6 +107,10 @@
       transform: translateX(-50%);
       z-index: 1;
       text-align: center;
+      display: flex;
+      flex-direction: column;
+      gap: 0.45rem;
+      align-items: center;
     }
 
     .product-link {
@@ -144,6 +148,7 @@
 
   <div class="products">
     <a class="product-link" id="comptoirLink" href="https://comptoir.cosmobot.fr">[<span class="product-name">comptoir</span>]<span class="product-tagline"> — manage your restaurant team</span></a>
+    <a class="product-link" id="bulkoLink" href="https://bulko.cosmobot.fr">[<span class="product-name">bulko</span>]<span class="product-tagline"> — audit your supplier spend</span></a>
   </div>
 
   <script>
@@ -164,9 +169,15 @@
     function applyTheme() {
       html.setAttribute('data-theme', theme);
       iconEl.textContent = ICONS[theme];
-      // Sync theme to comptoir link
-      const link = document.getElementById('comptoirLink');
-      if (link) link.href = 'https://comptoir.cosmobot.fr?theme=' + theme;
+      // Sync theme to product links
+      const productLinks = [
+        ['comptoirLink', 'https://comptoir.cosmobot.fr'],
+        ['bulkoLink', 'https://bulko.cosmobot.fr'],
+      ];
+      for (const [id, baseUrl] of productLinks) {
+        const link = document.getElementById(id);
+        if (link) link.href = baseUrl + '?theme=' + theme;
+      }
     }
 
     applyTheme();
@@ -245,6 +256,24 @@
       document.getElementById('comptoirLink')
     );
 
+    // Bulko — basket-like arc, lower-left area
+    const bulkoConstellation = makeConstellation(
+      [
+        { x: 0.18, y: 0.62 }, // 0 handle left
+        { x: 0.24, y: 0.56 }, // 1 handle top
+        { x: 0.30, y: 0.62 }, // 2 handle right
+        { x: 0.20, y: 0.69 }, // 3 basket left
+        { x: 0.26, y: 0.73 }, // 4 basket bottom
+        { x: 0.32, y: 0.69 }, // 5 basket right
+      ],
+      [
+        [0, 1], [1, 2],       // handle
+        [0, 3], [3, 4], [4, 5], [5, 2], // basket
+        [3, 5],               // rim
+      ],
+      document.getElementById('bulkoLink')
+    );
+
     // Contact — Cassiopeia-like W, lower-right area
     const contactConstellation = makeConstellation(
       [
@@ -259,7 +288,7 @@
       document.querySelector('.contact')
     );
 
-    const constellations = [comptoirConstellation, contactConstellation];
+    const constellations = [comptoirConstellation, bulkoConstellation, contactConstellation];
 
     function drawConstellations(dt) {
       const c = starColor();
