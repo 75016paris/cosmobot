@@ -223,6 +223,7 @@ h1 {
   background: var(--bg);
   color: var(--text);
   --panel: transparent;
+  --document-bg: #000000;
 }
 
 html[data-theme="light"] .cv-document-page {
@@ -231,6 +232,7 @@ html[data-theme="light"] .cv-document-page {
   --muted: #222222;
   --faint: #555555;
   --line: #111111;
+  --document-bg: #ffffff;
 }
 
 html[data-theme="dark"] .cv-document-page {
@@ -239,9 +241,15 @@ html[data-theme="dark"] .cv-document-page {
   --muted: #d0d0d0;
   --faint: #8a8a8a;
   --line: #666666;
+  --document-bg: #000000;
 }
 
-.cv-document-page #stars { display: none; }
+.cv-document-page main {
+  background: var(--document-bg);
+  border: 1px solid var(--line);
+  margin: 7rem auto 5rem;
+  padding: clamp(1.5rem, 4vw, 3rem);
+}
 
 .cv-document-page .readme {
   background: var(--bg);
@@ -316,4 +324,8 @@ video.readme-media {
 
 @media (max-width: 760px) {
   main { padding-top: 7rem; }
+  .cv-document-page main {
+    margin-top: 6rem;
+    padding: 1.25rem;
+  }
 }
