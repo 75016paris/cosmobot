@@ -84,7 +84,7 @@ function mediaHtml(alt, url, baseUrl) {
   const lower = src.split('?')[0].toLowerCase();
 
   if (/\.(mp4|webm|ogg|mov)$/.test(lower)) {
-    return `<video class="readme-media" controls preload="metadata"><source src="${safeSrc}">Your browser does not support embedded video.</video>`;
+    return `<video class="readme-media" controls preload="metadata"><source src="${safeSrc}">Votre navigateur ne prend pas en charge la vidéo intégrée.</video>`;
   }
 
   return `<img class="readme-media" src="${safeSrc}" alt="${safeAlt}" loading="lazy">`;
@@ -200,7 +200,7 @@ async function loadReadme() {
         return;
       } catch (_) {}
     }
-    target.innerHTML = `<p>README unavailable.</p><p><a href="${primary}">${primary}</a></p>`;
+    target.innerHTML = `<p>README indisponible.</p><p><a href="${primary}">${primary}</a></p>`;
     updateScrollNav();
   }
 }
