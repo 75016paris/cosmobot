@@ -322,6 +322,13 @@ video.readme-media {
   aspect-ratio: 16 / 9;
 }
 
+.page-footer {
+  padding: 3.5rem 0 0;
+  text-align: center;
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 0.84rem;
+}
+
 @media (max-width: 760px) {
   main { padding-top: 7rem; }
   .cv-document-page main {
