@@ -244,10 +244,17 @@ html[data-theme="dark"] .cv-document-page {
   --document-bg: #000000;
 }
 
+.cv-document-page > .project-header {
+  position: relative;
+  z-index: 1;
+  width: min(920px, calc(100% - 2.4rem));
+  margin: 7rem auto 0;
+}
+
 .cv-document-page main {
   background: var(--document-bg);
   border: 1px solid var(--line);
-  margin: 7rem auto 5rem;
+  margin: 1.25rem auto 3rem;
   padding: clamp(1.5rem, 4vw, 3rem);
 }
 
@@ -288,6 +295,8 @@ html[data-theme="dark"] .cv-document-page {
 }
 
 .document-contact {
+  position: relative;
+  z-index: 1;
   padding: 4rem 0 0;
   text-align: center;
 }
@@ -323,7 +332,9 @@ video.readme-media {
 }
 
 .page-footer {
-  padding: 3.5rem 0 0;
+  position: relative;
+  z-index: 1;
+  padding: 3.5rem 0 5rem;
   text-align: center;
   font-family: 'Courier New', Courier, monospace;
   font-size: 0.84rem;
@@ -331,8 +342,11 @@ video.readme-media {
 
 @media (max-width: 760px) {
   main { padding-top: 7rem; }
-  .cv-document-page main {
+  .cv-document-page > .project-header {
     margin-top: 6rem;
+  }
+  .cv-document-page main {
+    margin-top: 1rem;
     padding: 1.25rem;
   }
 }
