@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -404,104 +404,104 @@
 <body>
   <canvas id="stars"></canvas>
 
-  <nav class="top-nav" aria-label="Navigation principale">
-    <a href="#projets">[<span>projets</span>]</a>
-    <a href="#about">[<span>à propos</span>]</a>
+  <nav class="top-nav" aria-label="Main navigation">
+    <a href="#projects">[<span>projects</span>]</a>
+    <a href="#about">[<span>about</span>]</a>
     <a href="#contact">[<span>contact</span>]</a>
   </nav>
 
   <div class="corner-controls">
-    <nav class="language-switch" aria-label="Langue">
-      <a class="is-active" href="/" aria-current="page">[<span>fr</span>]</a>
+    <nav class="language-switch" aria-label="Language">
+      <a href="../">[<span>fr</span>]</a>
       <span>/</span>
-      <a href="en/">[<span>en</span>]</a>
+      <a class="is-active" href="index.html" aria-current="page">[<span>en</span>]</a>
     </nav>
-    <button class="theme-toggle" id="themeToggle" aria-label="Changer le thème">
+    <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
       <span id="toggleIcon">●</span>
     </button>
   </div>
 
-  <nav class="scroll-nav" aria-label="Navigation de défilement">
-    <button type="button" id="scrollUp" aria-label="Faire défiler vers le haut">↑</button>
-    <button type="button" id="scrollDown" aria-label="Faire défiler vers le bas">↓</button>
+  <nav class="scroll-nav" aria-label="Scroll navigation">
+    <button type="button" id="scrollUp" aria-label="Scroll up">↑</button>
+    <button type="button" id="scrollDown" aria-label="Scroll down">↓</button>
   </nav>
 
   <main>
     <section class="hero" id="top">
       <h1 class="logo"><span class="logo-cosmo">cosmo</span><span class="logo-bot">bot.fr</span></h1>
-      <div class="hero-products" aria-label="Projets principaux">
-        <a class="product-link" href="https://comptoir.cosmobot.fr" target="_blank" rel="noopener noreferrer">[<span class="product-name">comptoir</span>]<span class="product-tagline"> — SaaS de planning restaurant</span></a>
-        <a class="product-link" href="https://solar.cosmobot.fr" target="_blank" rel="noopener noreferrer">[<span class="product-name">prévision solaire</span>]<span class="product-tagline"> — production & anomalies</span></a>
-        <a class="product-link" href="https://analytics.cosmobot.fr" target="_blank" rel="noopener noreferrer">[<span class="product-name">analyse abonnements</span>]<span class="product-tagline"> — cohortes, churn & commandes</span></a>
+      <div class="hero-products" aria-label="Featured products">
+        <a class="product-link" href="https://comptoir.cosmobot.fr" target="_blank" rel="noopener noreferrer">[<span class="product-name">comptoir</span>]<span class="product-tagline"> — restaurant staff planning SaaS</span></a>
+        <a class="product-link" href="https://solar.cosmobot.fr" target="_blank" rel="noopener noreferrer">[<span class="product-name">solar forecasting</span>]<span class="product-tagline"> — production & anomaly dashboard</span></a>
+        <a class="product-link" href="https://analytics.cosmobot.fr" target="_blank" rel="noopener noreferrer">[<span class="product-name">subscription analytics</span>]<span class="product-tagline"> — cohorts, churn & orders</span></a>
       </div>
     </section>
 
     <section id="services" aria-label="Services">
       <div class="text-list">
         <article class="text-item">
-          <h4>Automatiser des processus métier</h4>
-          <p>Clarifier un besoin opérationnel, identifier les tâches répétitives, puis créer un workflow, script ou outil simple pour gagner du temps.</p>
+          <h4>Automate business processes</h4>
+          <p>Clarify an operational need, identify repetitive tasks, then build a simple workflow, script or tool that saves time.</p>
         </article>
         <article class="text-item">
-          <h4>Connecter des outils et des APIs</h4>
-          <p>Intégrations REST, services externes, paiements, webhooks, authentification, synchronisation de données, tests et documentation pour fiabiliser des flux entre outils.</p>
+          <h4>Connect tools and APIs</h4>
+          <p>REST integrations, external services, payments, webhooks, authentication, data synchronization, tests and documentation to make tool-to-tool workflows reliable.</p>
         </article>
         <article class="text-item">
-          <h4>Transformer des données en dashboards</h4>
-          <p>Traitement de données métier, KPIs, visualisations, dashboards Streamlit et rapports exploitables pour prendre de meilleures décisions.</p>
+          <h4>Turn data into dashboards</h4>
+          <p>Business data processing, KPIs, visualizations, Streamlit dashboards and usable reports for better decisions.</p>
         </article>
         <article class="text-item">
-          <h4>Concevoir des assistants IA utiles</h4>
-          <p>Assistants métier, workflows LLM, tool-calling, confirmations avant actions sensibles, tests de fiabilité et garde-fous simples.</p>
+          <h4>Design useful AI assistants</h4>
+          <p>Business assistants, LLM workflows, tool calling, confirmations before sensitive actions, reliability tests and simple guardrails.</p>
         </article>
       </div>
     </section>
 
-    <section id="projets">
+    <section id="projects">
       <div class="section-head">
-        <h3>Projets</h3>
+        <h3>Projects</h3>
       </div>
       <div class="projects">
-        <article class="project" id="comptoir" tabindex="0" data-href="projects/comptoir.html" aria-label="Ouvrir la page projet Comptoir">
+        <article class="project" id="comptoir" tabindex="0" data-href="projects/comptoir.html" aria-label="Open Comptoir project page">
           <div>
-            <h4>Comptoir — SaaS vertical de planification RH pour restaurants</h4>
-            <p>SaaS métier avec dashboard web et assistant WhatsApp pour gérer plannings, équipes, heures, congés, remplacements et contraintes RH.</p>
+            <h4>Comptoir — vertical workforce planning SaaS for restaurants</h4>
+            <p>Business SaaS with a web dashboard and WhatsApp assistant to manage schedules, teams, hours, leave, replacements and HR constraints.</p>
             <div class="meta">Python · SQL · React · TypeScript · WhatsApp API · OR-Tools · VPS</div>
           </div>
           <div class="project-links">
-            <a class="bracket-link" href="https://comptoir.cosmobot.fr" target="_blank" rel="noopener noreferrer">[<span>démo</span>]</a>
+            <a class="bracket-link" href="https://comptoir.cosmobot.fr" target="_blank" rel="noopener noreferrer">[<span>demo</span>]</a>
             <a class="bracket-link" href="https://github.com/75016paris/comptoir-ai-restaurant-planning" target="_blank" rel="noopener noreferrer">[<span>github</span>]</a>
           </div>
         </article>
-        <article class="project" id="bernardo" tabindex="0" data-href="projects/bernardo.html" aria-label="Ouvrir la page projet Bernardo Eval Harness">
+        <article class="project" id="bernardo" tabindex="0" data-href="projects/bernardo.html" aria-label="Open Bernardo Eval Harness project page">
           <div>
             <h4>Bernardo Eval Harness</h4>
-            <p>Banc de test pour évaluer un agent IA métier : tool routing, permissions, isolation multi-tenant, prompt injection et replay d’échecs.</p>
-            <div class="meta">Python · évaluation LLM · QA · sécurité IA · CLI</div>
+            <p>Test harness for evaluating a business AI agent: tool routing, permissions, multi-tenant isolation, prompt injection and failure replay.</p>
+            <div class="meta">Python · LLM eval · QA · AI safety · CLI</div>
           </div>
           <div class="project-links">
             <a class="bracket-link" href="https://github.com/75016paris/bernardo-ai-agent-eval-harness" target="_blank" rel="noopener noreferrer">[<span>github</span>]</a>
           </div>
         </article>
-        <article class="project" id="solar-forecasting" tabindex="0" data-href="projects/solar-forecasting.html" aria-label="Ouvrir la page projet Solar Forecasting Dashboard">
+        <article class="project" id="solar-forecasting" tabindex="0" data-href="projects/solar-forecasting.html" aria-label="Open Solar Forecasting Dashboard project page">
           <div>
-            <h4>Solar Forecasting Dashboard — prévision solaire & anomalies</h4>
-            <p>Dashboard Python/Streamlit pour prévoir une production photovoltaïque, analyser des sites et détecter des anomalies à partir de données synthétiques/anonymisées.</p>
+            <h4>Solar Forecasting Dashboard — solar forecasting & anomalies</h4>
+            <p>Python/Streamlit dashboard to forecast photovoltaic production, analyze sites and detect anomalies from synthetic/anonymized data.</p>
             <div class="meta">Python · pandas · scikit-learn · Streamlit · Plotly</div>
           </div>
           <div class="project-links">
-            <a class="bracket-link" href="https://solar.cosmobot.fr" target="_blank" rel="noopener noreferrer">[<span>démo</span>]</a>
+            <a class="bracket-link" href="https://solar.cosmobot.fr" target="_blank" rel="noopener noreferrer">[<span>demo</span>]</a>
             <a class="bracket-link" href="https://github.com/75016paris/solar-forecasting-anomaly-detection-dashboard" target="_blank" rel="noopener noreferrer">[<span>github</span>]</a>
           </div>
         </article>
-        <article class="project" id="subscription-analytics" tabindex="0" data-href="projects/subscription-analytics.html" aria-label="Ouvrir la page projet Subscription Analytics Dashboard">
+        <article class="project" id="subscription-analytics" tabindex="0" data-href="projects/subscription-analytics.html" aria-label="Open Subscription Analytics Dashboard project page">
           <div>
-            <h4>Subscription Analytics Dashboard — abonnements & commandes</h4>
-            <p>Dashboard métier pour analyser abonnements, commandes, conversions, churn, renouvellements et cohortes à partir de données synthétiques/anonymisées.</p>
-            <div class="meta">Python · pandas · Streamlit · analyse · KPIs</div>
+            <h4>Subscription Analytics Dashboard — subscriptions & orders</h4>
+            <p>Business dashboard for analyzing subscriptions, orders, conversions, churn, renewals and cohorts from synthetic/anonymized data.</p>
+            <div class="meta">Python · pandas · Streamlit · analytics · KPIs</div>
           </div>
           <div class="project-links">
-            <a class="bracket-link" href="https://analytics.cosmobot.fr" target="_blank" rel="noopener noreferrer">[<span>démo</span>]</a>
+            <a class="bracket-link" href="https://analytics.cosmobot.fr" target="_blank" rel="noopener noreferrer">[<span>demo</span>]</a>
             <a class="bracket-link" href="https://github.com/75016paris/subscription-analytics-dashboard" target="_blank" rel="noopener noreferrer">[<span>github</span>]</a>
           </div>
         </article>
@@ -510,37 +510,37 @@
 
     <section id="about">
       <div class="section-head">
-        <h3>À propos</h3>
+        <h3>About</h3>
       </div>
       <div class="about">
         <div>
           <p>
-            Cosmobot regroupe mes projets autour des outils métier, de l’automatisation,
-            des dashboards data et de l’IA appliquée.
+            Cosmobot brings together my projects around business tools, automation,
+            data dashboards and applied AI.
           </p>
           <p>
-            Je viens de la production audiovisuelle, de la gestion de projet et de la coordination d’équipes.
-            J’y ai appris à cadrer un besoin, prioriser, communiquer clairement et livrer sous contrainte.
+            My background is in audiovisual production, project management and team coordination.
+            I learned to frame needs, prioritize, communicate clearly and deliver under constraints.
           </p>
           <p>
-            Aujourd’hui, je construis des outils concrets avec Python, SQL, APIs et LLMs : automatisations,
-            dashboards, intégrations, assistants métier et tests d’agents IA.
+            Today I build practical tools with Python, SQL, APIs and LLMs: automations,
+            dashboards, integrations, business assistants and AI agent tests.
           </p>
           <p>
-            Je suis ouvert à des missions indépendantes ciblées, ainsi qu’à un poste opérationnel en entreprise,
-            ESN ou cabinet de conseil pour contribuer en équipe et progresser sur des problèmes réels.
+            I am open to focused freelance missions, as well as an operational tech role in a company,
+            IT services firm or consulting environment where I can contribute in a team and grow on real problems.
           </p>
           <p>
-            <a class="bracket-link prominent-link" href="cv.html">[<span>voir mon CV</span>]</a>
+            <a class="bracket-link prominent-link" href="cv.html">[<span>view my CV</span>]</a>
           </p>
         </div>
         <ul class="roles">
-          <li>Automatisation métier</li>
-          <li>Support applicatif / SaaS / API</li>
-          <li>Intégration API & paiements</li>
-          <li>Dashboards data</li>
-          <li>Assistants IA métier</li>
-          <li>QA / évaluation d’agents IA</li>
+          <li>Business automation</li>
+          <li>Application / SaaS / API support</li>
+          <li>API & payment integrations</li>
+          <li>Data dashboards</li>
+          <li>Business AI assistants</li>
+          <li>QA / AI agent evaluation</li>
         </ul>
       </div>
     </section>
@@ -558,7 +558,7 @@
     </section>
 
     <footer class="site-footer">
-      <a class="bracket-link" href="#top">[<span>haut de page</span>]</a>
+      <a class="bracket-link" href="#top">[<span>back to top</span>]</a>
     </footer>
   </main>
 

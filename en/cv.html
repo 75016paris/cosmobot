@@ -1,34 +1,34 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>CV — Paul Roitfeld — Cosmobot</title>
-  <link rel="stylesheet" href="projects/project-page.css">
+  <link rel="stylesheet" href="../projects/project-page.css">
 </head>
 <body class="cv-document-page">
   <canvas id="stars"></canvas>
 
-  <nav class="top-nav" aria-label="Navigation principale">
-    <a href="index.html#about">[<span>retour</span>]</a>
-    <a href="index.html#projets">[<span>projets</span>]</a>
+  <nav class="top-nav" aria-label="Main navigation">
+    <a href="index.html#about">[<span>back</span>]</a>
+    <a href="index.html#projects">[<span>projects</span>]</a>
     <a href="#contact">[<span>contact</span>]</a>
   </nav>
 
   <div class="corner-controls">
-    <nav class="language-switch" aria-label="Langue">
-      <a class="is-active" href="cv.html" aria-current="page">[<span>fr</span>]</a>
+    <nav class="language-switch" aria-label="Language">
+      <a href="../cv.html">[<span>fr</span>]</a>
       <span>/</span>
-      <a href="en/cv.html">[<span>en</span>]</a>
+      <a class="is-active" href="cv.html" aria-current="page">[<span>en</span>]</a>
     </nav>
-    <button class="theme-toggle" id="themeToggle" aria-label="Changer le thème">
+    <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
       <span id="toggleIcon">●</span>
     </button>
   </div>
 
-  <nav class="scroll-nav" aria-label="Navigation de défilement">
-    <button type="button" id="scrollUp" aria-label="Faire défiler vers le haut">↑</button>
-    <button type="button" id="scrollDown" aria-label="Faire défiler vers le bas">↓</button>
+  <nav class="scroll-nav" aria-label="Scroll navigation">
+    <button type="button" id="scrollUp" aria-label="Scroll up">↑</button>
+    <button type="button" id="scrollDown" aria-label="Scroll down">↓</button>
   </nav>
 
   <header class="project-header" id="top">
@@ -37,14 +37,14 @@
     </a>
 
     <div class="project-actions">
-      <a class="bracket-link" href="cv/CV_IA_APPLIQUEE_FR.pdf" download>[<span>télécharger</span>]</a>
-      <a class="bracket-link" href="cv/CV_IA_APPLIQUEE_FR.md">[<span>markdown</span>]</a>
+      <a class="bracket-link" href="../cv/CV_IA_APPLIQUEE_FR.pdf" download>[<span>French PDF</span>]</a>
+      <a class="bracket-link" href="../cv/CV_IA_APPLIQUEE_EN.md">[<span>markdown</span>]</a>
       <a class="bracket-link" href="#contact">[<span>contact</span>]</a>
     </div>
   </header>
 
-  <main data-readme-url="cv/CV_IA_APPLIQUEE_FR.md">
-    <article class="readme" id="readme">Chargement du CV…</article>
+  <main data-readme-url="../cv/CV_IA_APPLIQUEE_EN.md">
+    <article class="readme" id="readme">Loading CV…</article>
   </main>
 
   <footer class="document-contact" id="contact">
@@ -58,9 +58,9 @@
   </footer>
 
   <footer class="page-footer">
-    <a class="bracket-link" href="#top">[<span>haut de page</span>]</a>
+    <a class="bracket-link" href="#top">[<span>back to top</span>]</a>
   </footer>
 
-  <script src="projects/project-page.js"></script>
+  <script src="../projects/project-page.js"></script>
 </body>
 </html>

@@ -3,6 +3,11 @@ const iconEl = document.getElementById('toggleIcon');
 const canvas = document.getElementById('stars');
 const ctx = canvas.getContext('2d');
 const ICONS = { light: '☾︎', dark: '☀︎' };
+const IS_FR = html.lang && html.lang.toLowerCase().startsWith('fr');
+const TEXT = {
+  videoUnsupported: IS_FR ? 'Votre navigateur ne prend pas en charge la vidéo intégrée.' : 'Your browser does not support embedded video.',
+  readmeUnavailable: IS_FR ? 'README indisponible.' : 'README unavailable.'
+};
 
 function getSystemPref() {
   return window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
@@ -84,7 +89,7 @@ function mediaHtml(alt, url, baseUrl) {
   const lower = src.split('?')[0].toLowerCase();
 
   if (/\.(mp4|webm|ogg|mov)$/.test(lower)) {
-    return `<video class="readme-media" controls preload="metadata"><source src="${safeSrc}">Votre navigateur ne prend pas en charge la vidéo intégrée.</video>`;
+    return `<video class="readme-media" controls preload="metadata"><source src="${safeSrc}">${TEXT.videoUnsupported}</video>`;
   }
 
   return `<img class="readme-media" src="${safeSrc}" alt="${safeAlt}" loading="lazy">`;
@@ -200,7 +205,7 @@ async function loadReadme() {
         return;
       } catch (_) {}
     }
-    target.innerHTML = `<p>README indisponible.</p><p><a href="${primary}">${primary}</a></p>`;
+    target.innerHTML = `<p>${TEXT.readmeUnavailable}</p><p><a href="${primary}">${primary}</a></p>`;
     updateScrollNav();
   }
 }

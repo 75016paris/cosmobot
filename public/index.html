@@ -63,6 +63,42 @@
 
     .theme-toggle:hover { opacity: 1; }
 
+    .corner-controls {
+      position: fixed;
+      top: 1.2rem;
+      right: 1.2rem;
+      z-index: 20;
+      display: flex;
+      align-items: center;
+      gap: 0.85rem;
+      font-family: 'Courier New', Courier, monospace;
+      font-size: 0.72rem;
+    }
+
+    .corner-controls .theme-toggle {
+      position: static;
+      top: auto;
+      right: auto;
+    }
+
+    .language-switch {
+      display: flex;
+      gap: 0.25rem;
+      color: var(--muted);
+    }
+
+    .language-switch a,
+    .language-switch span {
+      opacity: 0.62;
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .language-switch a:hover,
+    .language-switch a.is-active { opacity: 1; }
+
+    .language-switch a:hover span { text-decoration: underline; }
+
     .top-nav {
       position: fixed;
       top: 1.35rem;
@@ -359,7 +395,7 @@
     @media (max-width: 860px) {
       .projects, .about, .text-item { grid-template-columns: 1fr; }
       .top-nav {
-        right: 4rem;
+        right: 8rem;
       }
       .section-head { align-items: flex-start; flex-direction: column; }
     }
@@ -374,9 +410,16 @@
     <a href="#contact">[<span>contact</span>]</a>
   </nav>
 
-  <button class="theme-toggle" id="themeToggle" aria-label="Changer le thème">
-    <span id="toggleIcon">●</span>
-  </button>
+  <div class="corner-controls">
+    <nav class="language-switch" aria-label="Langue">
+      <a class="is-active" href="/" aria-current="page">[<span>fr</span>]</a>
+      <span>/</span>
+      <a href="en/">[<span>en</span>]</a>
+    </nav>
+    <button class="theme-toggle" id="themeToggle" aria-label="Changer le thème">
+      <span id="toggleIcon">●</span>
+    </button>
+  </div>
 
   <nav class="scroll-nav" aria-label="Navigation de défilement">
     <button type="button" id="scrollUp" aria-label="Faire défiler vers le haut">↑</button>
