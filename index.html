@@ -307,6 +307,8 @@
     }
 
     .project {
+      position: relative;
+      overflow: hidden;
       background: color-mix(in srgb, var(--bg) 94%, var(--text));
       padding: 1.25rem;
       min-height: 250px;
@@ -318,11 +320,69 @@
       transition: background 0.2s, color 0.4s;
     }
 
+    .project::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+      background-image: var(--project-preview);
+      background-size: cover;
+      background-position: center;
+      opacity: 0;
+      filter: brightness(0.58) saturate(0.9);
+      transform: scale(1.04);
+      transition: opacity 0.24s ease, transform 0.32s ease;
+    }
+
+    .project::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+      background: rgba(0, 0, 0, 0.34);
+      opacity: 0;
+      transition: opacity 0.24s ease;
+    }
+
+    .project > * {
+      position: relative;
+      z-index: 1;
+    }
+
     .project:hover,
     .project:focus-visible {
       background: color-mix(in srgb, var(--bg) 88%, var(--text));
+      color: #f0f0f0;
       outline: none;
     }
+
+    .project:hover::before,
+    .project:focus-visible::before {
+      opacity: 1;
+      transform: scale(1);
+    }
+
+    .project:hover::after,
+    .project:focus-visible::after {
+      opacity: 1;
+    }
+
+    .project:hover h4,
+    .project:focus-visible h4,
+    .project:hover p,
+    .project:focus-visible p,
+    .project:hover .meta,
+    .project:focus-visible .meta,
+    .project:hover .project-links,
+    .project:focus-visible .project-links {
+      color: rgba(240, 240, 240, 0.9);
+      text-shadow: 0 1px 8px rgba(0, 0, 0, 0.85);
+    }
+
+    #comptoir { --project-preview: url('assets/project-previews/comptoir-dashboard.png'); }
+    #bernardo { --project-preview: url('assets/project-previews/bernardo-terminal.png'); }
+    #solar-forecasting { --project-preview: url('assets/project-previews/solar-executive.png'); }
+    #subscription-analytics { --project-preview: url('assets/project-previews/subscription-business-kpis.png'); }
 
     .meta {
       color: var(--faint);
