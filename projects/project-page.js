@@ -82,13 +82,17 @@ function resolveAssetUrl(url, baseUrl) {
   }
 }
 
+function isGitHubAttachmentUrl(url) {
+  return /^https:\/\/github\.com\/user-attachments\/assets\/[0-9a-f-]+(?:[?#].*)?$/i.test(url);
+}
+
 function mediaHtml(alt, url, baseUrl) {
   const src = resolveAssetUrl(url, baseUrl);
   const safeAlt = escapeHtml(alt);
   const safeSrc = escapeHtml(src);
   const lower = src.split('?')[0].toLowerCase();
 
-  if (/\.(mp4|webm|ogg|mov)$/.test(lower)) {
+  if (/\.(mp4|webm|ogg|mov)$/.test(lower) || isGitHubAttachmentUrl(src)) {
     return `<video class="readme-media" controls preload="metadata"><source src="${safeSrc}">${TEXT.videoUnsupported}</video>`;
   }
 
@@ -165,9 +169,10 @@ function renderMarkdown(markdown, baseUrl) {
     }
 
     const directMedia = line.trim().match(/^(\S+\.(?:png|jpe?g|gif|webp|svg|mp4|webm|ogg|mov)(?:\?\S*)?)$/i);
-    if (directMedia) {
+    const directGitHubAttachment = line.trim().match(/^(https:\/\/github\.com\/user-attachments\/assets\/[0-9a-f-]+(?:[?#]\S*)?)$/i);
+    if (directMedia || directGitHubAttachment) {
       closeList();
-      out.push(mediaHtml('', directMedia[1], baseUrl));
+      out.push(mediaHtml('', (directMedia || directGitHubAttachment)[1], baseUrl));
       continue;
     }
 
