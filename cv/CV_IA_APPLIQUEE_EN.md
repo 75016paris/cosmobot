@@ -2,9 +2,9 @@
 
 **Application Support & Python Automation | APIs, SQL, SaaS, Data & Applied AI**
 
-Bayonne/Biarritz · Remote France/Europe · Occasional Paris presence  
+Paris until September 2026 · Bayonne/Biarritz afterward · Remote France/Europe  
 +33 6 86 45 36 74 · paulyacha@gmail.com · [cosmobot.fr](https://cosmobot.fr) · [github.com/75016paris](https://github.com/75016paris)  
-Available from September 2026
+Available immediately
 
 ---
 
